@@ -1,61 +1,52 @@
 # jkson_fcc_mod
 
-[*** РУССКАЯ ВЕРСИЯ ***](https://github.com/jkson5/jkson_fcc_mod/blob/master/README_Russian.md)
+[*** РУССКАЯ ВЕРСИЯ ***](http://github.com/jkson5/jkson_fcc_mod/blob/master/README_Russian.md)
 
-For forcing Mavic Pro SDR settings such as FCC,Boost,force_2.3G or force_2.5G, we can use internal commands.
+[*** VERSIONE ITALIANA ***](http://github.com/jkson5/jkson_fcc_mod/blob/master/README_Italian.md)
+
+For forcing Mavic Pro or P4Pv2 SDR settings such as FCC, Boost, force_2.3G or force_2.5G, we can use internal commands.
 These commands will set radio parameters with any smartphone OS, any programms (e.g. Litchi), and even without smartphone at all. Because it will run on the drone locally. You have to apply this mod only for the drone. RC will sync.
 
-## How to install
+If you want to use force23 or force25, you always must switch RC first. Otherwise frequency will not shift.
 
-1) [Please download this repo](https://github.com/jkson5/jkson_fcc_mod/archive/master.zip) and unzip it to your desktop. Rename unzipped folder to master, by removing extra characters.
+**This mod only for Mavic PRO/Platinum (1.04.0300 and lower) and Phantom4Pv2 (1.00.22.00 and lower)**
 
-2) In folder master on your desktop, please take file with .sh extension with parameters you need (file name contains parameters), and rename it to check_1860_state.sh by removing extra characters.
+## How to install (Windows)
 
-3) Connect your Mavic PRO with USB cable. Switch it on.
+1) [Please download this repo](https://github.com/jkson5/jkson_fcc_mod/archive/master.zip) and unzip it somewhere.
 
-4) Download and run [DUMLDore](https://github.com/jezzab/DUMLdore/releases/download/v3.15/DUMLdoreV3.zip). Press "ADB ENABLE".
+2) Connect your Mavic PRO or P4Pv2 with USB cable. Switch it on.
 
-5) Please check in Windows device manager, is there any unrecognized DJI devices. If yes, unpack ADBDriver.zip and try to force update driver for this device this way - Update driver software>Browse my computer>Let me pick from a list>show all>next>Have Disk>browse and select android_winusb.inf in unpacked ADBDriver folder. 
+3) Download and run [DUMLDore](https://github.com/jezzab/DUMLdore/releases/download/v3.15/DUMLdoreV3.zip). Press "ADB ENABLE".
 
-6) Please run commandline with Win+R and cmd, or from Windows start menu.
+4) Please check in Windows device manager, is there any unrecognized DJI devices. If yes, unpack ADBDriver.zip and try to force update driver for this device this way - Update driver software>Browse my computer>Let me pick from a list>show all>next>Have Disk>browse and select android_winusb.inf in unpacked ADBDriver folder. 
 
-7) In commandline please do these commands, one by one:
+5) In mod folder run install_mod.bat and follow instruction in commandline
 
-cd desktop/master
+## How to use
 
-adb shell busybox mount -o remount,rw /vendor
+Following installation procedure, you will able to choose different options, depends of aircraft model. Fixed FCC or Boost options will set persistant mode, and will take effect after reboot.
 
-adb shell mkdir /vendor/bin
+**For Mavic PRO/Platinum available "loop selector" mode. It means, you can select modes mid-flight, in loop. For switch to next mode you have to hold "pause" button and simultaneously press lefthand backside button (C1) once. The system allows you to change the mode no faster than every 5 seconds.**
 
-adb shell chmod 755 /vendor/bin
-
-adb push check_1860_state.sh /vendor/bin/check_1860_state.sh
-
-adb shell chmod 755 /vendor/bin/check_1860_state.sh
-
-8) Switch Mavic off
+The sequence is Default>FCC>Boost>SDR reset. "SDR reset" means SDR will restart with default mode. Please keep in mind, when SDR will restart, connection will be lost for few seconds (~3-4s), and the drone will start failsafe procedure, e.g. GoHome.
 
 ## How to check FCC mode
 
-You should start DJI GO, go to HD settings, and look to frequency graph. If line ~1km is a bit under 90dBm, you are in CE mode. If line is higher than 90dBm, you are in FCC mode. Boost mode(1.5W) you can proof only with special radio analyzer, or with the test flight. Please ensure you have enough battery for back flight.
+You should start DJI GO, go to HD settings, and look to frequency graph. If line ~1km is a bit under 90dBm, you are in CE mode. If line is higher than 90dBm, you are in FCC mode. Boost mode(1.5W) you can proof only with [radio powermeter](https://youtu.be/FS0O841k_SU), or with the test flight. Please ensure you have enough battery for back flight.
 
-## How to say thanks
+## How to say thanks or contact me
 
-PayPal evgeniychuiko@gmail.com
+PayPal and email - evgeniychuiko@gmail.com
+Telegram messenger @jkson5, or email me, but please start with "thank you" to PayPal. I have spent few months for it, and will spend more with your support. Thank you in advance!
 
 ## How to remove jkson mod
 
-You have to do 1-6 points, and after do these commands one by one:
-
-cd desktop/master
-
-adb shell busybox mount -o remount,rw /vendor
-
-adb shell rm /vendor/bin/check_1860_state.sh
+You have to repeat installation procedure. You will find "Delete mod" option in next step after device selection.
 
 ## DeejayeyeHackingClub information repos aka "The OG's" (Original Gangsters)
 
-Special thanks to @jcase, @jan2642, @mefisto
+Special thanks to @jcase, @jan2642, @mefisto, @jezzab
 
 [http://dji.retroroms.info](http://dji.retroroms.info) - "Wiki"
 
